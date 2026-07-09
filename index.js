@@ -109,7 +109,7 @@ app.use((req, res, next) => {
 });
 
 app.get("/",(req,res)=>{
-    res.send("this is home root");
+    res.redirect("/listing");
 });
 
 app.get("/signup",(req,res)=>{
