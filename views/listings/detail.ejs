@@ -1,0 +1,114 @@
+<%layout('/layouts/boilerplate.ejs') -%>
+<body>
+  
+     <%if(success.length){%>
+        <div class="col-8 offset-2">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                 <%=success%>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>    
+   <% }%>
+
+    <%if(error.length){%>
+        <div class="col-8 offset-2">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                 <%=error%>
+               <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        </div>    
+   <% }%>
+
+<div class="row">
+    <div class="col-8 offset-2">
+      <h1>Details</h1>
+      <div class="card card-3">
+      <img src="<%=detail.image%>" class="card-img-top show-img" alt="card image">
+      <div class="card-body">
+      <p class="card-text">
+       <% if (detail.owner) { %>
+      <p><i>owned by: <%= detail.owner.username %></i></p>
+      <% }
+       else { %>
+     <p><i>owned by: unknown</i></p>
+      <% } %>
+        <h4><%=detail.title%></h4>
+      </p>
+       </div>
+      </div>
+
+    <ul>
+            <li><%=detail.description%></li>
+            <li>&#8377;<%=detail.price.toLocaleString("en-IN")%></li>
+            <li><%=detail.country%></li>
+    </ul>
+    <div class="buttom">
+
+      <%if(currUser._id.equals(detail.owner._id)){%>
+      <a href="/listing/edit/<%=detail._id%>"><button>Edit Details</button></a>
+      <br><br>
+    <form method="post" action="/listing/delete/<%=detail._id%>?_method=delete">
+       <button>Delete</button>
+    </form>
+    <% }%>
+
+    </div> 
+
+    <br>
+
+     <hr>
+
+     <h3>Leave review</h3>
+  <form action="/listing/review/<%=detail._id %>" method="post" novalidate class="needs-validation">
+  <fieldset class="starability-slot">
+  <input type="radio" id="no-rate" class="input-no-rate" name="rating" value="1" checked aria-label="No rating." />
+  <input type="radio" id="first-rate1" name="rating" value="1" />
+  <label for="first-rate1" title="Terrible">1 star</label>
+  <input type="radio" id="first-rate2" name="rating" value="2" />
+  <label for="first-rate2" title="Not good">2 stars</label>
+  <input type="radio" id="first-rate3" name="rating" value="3" />
+  <label for="first-rate3" title="Average">3 stars</label>
+  <input type="radio" id="first-rate4" name="rating" value="4" />
+  <label for="first-rate4" title="Very good">4 stars</label>
+  <input type="radio" id="first-rate5" name="rating" value="5" />
+  <label for="first-rate5" title="Amazing">5 stars</label>
+  </fieldset>
+
+    <div class="mb-3">
+      <label for="comment" class="form-label">Comment</label>
+      <textarea type="text" rows="5" cols="20" name="comment"  class="form-control" required></textarea>
+       <div class="invalid-feedback">
+          Please write a comment
+         </div>
+    </div>
+
+    <div class="mb-3">
+     <button type="submit" class="btn btn-dark mb-3">Submit</button>
+    </div>
+
+  </form>
+
+  <hr>
+
+<h4><b>Reviews</b></h4>
+
+<div class="row">
+  <% for (let r of detail.reviews) { %>
+    <div class="col-6 mb-3">
+      <div class="card">
+        <div class="card-body">
+          <p class="starability-result" data-rating="<%=r.rating%>"></p>
+          <h5 class="card-title">@<%=r.author.username%></h5>
+          <p class="card-text"><%= r.comment %></p>
+          <form method="post" action="/listing/<%=detail._id%>/review/<%=r._id%>?_method=delete">
+            <button type="submit" class="btn btn-dark mb-3">Delete</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  <% } %>
+</div>
+
+  </div>
+</div>
+</body>

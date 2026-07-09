@@ -1,0 +1,68 @@
+<%layout('/layouts/boilerplate.ejs') -%>
+<body>
+<div class="row">
+<div class="col-6 offset-3">
+     <h1>Edit The Details</h1>
+<form method="post" action="/listing/edit/<%=edit._id%>?_method=patch" enctype="multipart/form-data" novalidate class="needs-validation">
+     <div class="mb-3">
+          <label for="title" class="form-label">title</label>
+          <input type="text" name="title" value="<%=edit.title%>" class="form-control" required>
+          <div class="invalid-feedback">
+          Please choose a title
+         </div>
+     </div>
+     
+
+     <div class="mb-3">
+           <label for="Description" class="form-label">Description</label>
+          <textarea name="description" class="form-control" required><%= edit.description %></textarea>
+          <div class="invalid-feedback">
+            Please choose a description
+        </div>
+     </div>
+     
+
+     <div class="mb-3">
+        <label class="form-label">Current Image URL</label>
+        <input type="text" class="form-control" value="<%=edit.image%>"readonly>
+    </div>
+
+     <div class="mb-3">
+       <label class="form-label">Upload New Image (optional)</label>
+
+       <input type="file"  name="image" class="form-control" accept="image/*">
+     </div>
+
+<div class="row">
+     <div class="mb-3 col-md-4">
+          <label for="Price" class="form-label">Price</label>
+          <input type="text" name="price" value="<%=edit.price%>"  class="form-control" required>
+          <div class="invalid-feedback">
+        Please choose a Price
+        </div>
+     </div>
+     
+     <div class="mb-3 col-md-8">
+          <label for="Location" class="form-label">Location</label>
+          <input type="text" name="location" value="<%=edit.location%>"class="form-control" required>
+          <div class="invalid-feedback">
+        Please choose a Location
+        </div>
+     </div>  
+</div>
+     
+
+     <div class="mb-3">
+         <label for="Country" class="form-label">Country</label>
+         <input type="text" name="country" value="<%=edit.country%>" class="form-control" required>
+         <div class="invalid-feedback">
+        Please choose a Country
+        </div>
+     </div>
+
+     <button type="submit" class="btn btn-dark mb-3">Edit</button>
+
+</form>
+</div>
+</div>
+</body>

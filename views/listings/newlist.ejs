@@ -1,0 +1,72 @@
+<%layout('/layouts/boilerplate.ejs') -%>
+<body>
+    <div class="row">
+    <div class="col-6 offset-3">
+    <h1>Add List</h1>
+    <form method="post" action="/listing/new" class="needs-validation" novalidate enctype="multipart/form-data">
+
+    <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" name="title" class="form-control" required>
+
+        <div class="invalid-feedback">
+        Please choose a title
+        </div>
+    </div>
+     
+    <div class="mb-3">
+              <label for="description" class="form-label">Description</label>
+              <textarea name="description" class="form-control" required></textarea>
+        <div class="invalid-feedback">
+        Please choose a description
+       </div>
+     
+    </div>
+    
+
+    <div class="mb-3">
+              <!-- <label for="image" class="form-label">Image</label>
+              <input type="text" name="image" class="form-control"> -->
+        <label>Upload Image</label>
+        <input type="file" name="image" class="form-control" accept="image/*" required>
+        <div class="invalid-feedback">
+        Please upload file
+       </div>
+        
+    </div>
+
+<div class="row">
+    <div class="mb-3 col-md-4">
+        <label for="price" class="form-label">Price</label>
+        <input type="text" name="price" class="form-control" required>
+
+       <div class="invalid-feedback">
+        Please choose a price
+        </div>    
+    </div>
+   
+    <div class="mb-3 col-md-8">
+          <label for="loaction" class="form-label">Location</label>
+          <input type="text" name="location" class="form-control" required>
+          <div class="invalid-feedback">
+           Please choose a loaction
+        </div>
+    </div>
+</div>
+    
+    
+
+    <div class="">
+        <label for="country" class="form-label">Country</label>
+        <input type="text" name="country" class="form-control mb-3" required>
+        <div class="invalid-feedback">
+        Please choose a country
+       </div>
+    </div>
+     
+     <button type="submit" class="btn btn-dark mb-3">Add</button>
+
+    </form>
+    </div>
+    </div>
+</body>
