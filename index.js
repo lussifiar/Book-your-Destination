@@ -20,7 +20,7 @@ const passport=require("passport");
 const LocalStrategy = require("passport-local");
 const multer = require("multer");
 const { CloudinaryStorage } = require("multer-storage-cloudinary");
-const { cloudinary } = require("./cloudConfig.js");
+const { cloudinary } = require("./cloudconfig.js");
 
 // const storage = multer.diskStorage({
 //     destination: "uploads/",
