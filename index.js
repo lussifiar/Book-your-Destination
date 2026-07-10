@@ -34,7 +34,7 @@ const storage = new CloudinaryStorage({
     cloudinary: cloudinary,
     params: {
         folder: "airbnb_DEV",
-        allowed_formats: ["jpg", "png", "jpeg"],
+        allowed_formats: ["jpg", "png", "jpeg","avif"],
     },
 });
 
@@ -162,22 +162,6 @@ app.get("/logout",(req,res)=>{
     });  
 });
 
-// app.get("/demouser", async (req, res, next) => {
-//     try {
-//         const fakeUser = new user({
-//             username: "ashishjaiswal",
-//             email: "ashishjaiswal5660@gmail.com",
-//         });
-
-//         const demo = await user.register(fakeUser, "1221@jaiswal");
-
-//         res.send(demo);
-//     } catch (err) {
-//           req.flash("error", err.message);
-//           res.redirect("/listings/signup");
-//     }
-// });
-
 
 app.get("/listing",async(req,res,next)=>{
 try{
@@ -246,6 +230,7 @@ catch(err){
  next(err);
 }
 });
+
 
 
 app.get("/listing/edit/:id",async(req,res)=>{
@@ -363,8 +348,16 @@ app.use((req,res,next)=>{
 });
 
 //error middlewares
-app.use((err, req, res) => {
+// app.use((err, req, res) => {
+//     let { statusCode = 500, message = "Something went wrong" } = err;
+//     res.render("listings/error.ejs",{message});
+//     // res.status(statusCode).send(message);
+// });
+
+app.use((err, req, res, next) => {
+    console.error("Error:", err);
+
     let { statusCode = 500, message = "Something went wrong" } = err;
-    res.render("listings/error.ejs",{message});
-    // res.status(statusCode).send(message);
+
+    res.status(statusCode).render("listings/error.ejs", { message });
 });
